@@ -25,12 +25,16 @@ var Hapi = require('hapi'),
         },
         spa: {
             method: 'GET',
-            path: '{path*}',
+            path: '/{path*}',
             handler: {
+                // file: path.join(__dirname, '/dist/index.html')
                 file: path.join(__dirname, '/app/index.html')
             }
         }
     };
+
+		console.log('__dirname' , __dirname);
+    console.log('path', '/{path*}');
 
 server.route([ routes.css, routes.js, routes.assets, routes.templates, routes.spa ]);
 server.start( onServerStarted );
