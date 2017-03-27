@@ -5,7 +5,7 @@
          </div>
          <div class="album-view-details column half">
              <h2 class="album-view-title">{{ album.albumData.title }}</h2>
-             <h3 class="album-view-artist">{{ this.albumData.artist }}</h3>
+             <h3 class="album-view-artist">{{ album.albumData.artist }}</h3>
              <h5 class="album-view-release-info">{{ album.albumData.year + " Spanish Records" }}</h5>
          </div>
      </section>
@@ -25,4 +25,5 @@
          </tr>
      </table>
  </main>
+
  <ng-include src="'/templates/player_bar.html'"></ng-include>
