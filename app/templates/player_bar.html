@@ -5,15 +5,20 @@
                  <span class="ion-skip-backward"></span>
              </a>
              <a class="play-pause">
-                 <span class="ion-play" ng-show="!playing" ng-hide="playing" ng-click="playing=true"></span>
-                 <span class="ion-pause" ng-show="playing" ng-hide="!playing" ng-click="playing=false"></span>
+					 
+                 <span class="ion-play" ng-show="!album.currentSong.playing && currentBuzzObject != null" ng-click="album.songPlayer.play(currentSong)"></span>
+					 
+					  <span class="ion-play" ng-show="!currentSong.playing && !currentBuzzObject" ng-click="album.songPlayer.play(album.albumData.songs[0])"></span>
+					 
+                 <span class="ion-pause" ng-show="currentSong.playing && currentBuzzObject != null" ng-click="album.songPlayer.pause(currentSong)"></span>
+					 
              </a>
              <a class="next">
                  <span class="ion-skip-forward"></span>
              </a>
          </div>
          <div class="control-group currently-playing">
-             <h2 class="song-name"></h2>
+             <h2 class="song-name">{{ currentSong.playing }}</h2>
              <h2 class="artist-song-mobile"></h2>
              <h3 class="artist-name"></h3>
              <div class="seek-control">
