@@ -1,9 +1,6 @@
  (function() {
  	function SongPlayer(Fixtures) {
    	var SongPlayer = {};
-
-     	var currentAlbum = Fixtures.getAlbum();
-	 	var SongPlayer = {};		  
 		var currentBuzzObject = null;
 
 			/**
@@ -23,8 +20,7 @@
 			*/
 			var setSong = function(song) {
 				if (currentBuzzObject) {
-					currentBuzzObject.stop();
-					SongPlayer.currentSong.playing = null;
+					stopSong(SongPlayer.currentSong);
 				}
 				/**
 				* @desc Buzz object audio file
@@ -39,10 +35,15 @@
 			};
 		
 			var getSongIndex = function(song) {
-				return currentAlbum.songs.indexOf(song);
+				return SongPlayer.currentAlbum.songs.indexOf(song);
+			};
+		
+			var stopSong = function(song) {
+				currentBuzzObject.stop();
+				song.playing = null;
 			};
 		  
-		
+     		SongPlayer.currentAlbum = Fixtures.getAlbum();
 		 	SongPlayer.currentSong = null;
 			
 			/**
@@ -58,7 +59,7 @@
 					if (currentBuzzObject.isPaused()) {
 						currentBuzzObject.play();
 					} else {
-						var song = currentAlbum.songs[currentSongIndex];
+						var song = SongPlayer.currentAlbum.songs[currentSongIndex];
 						setSong(song);
 						playSong(song);
 					}
@@ -80,9 +81,25 @@
 				 var currentSongIndex = getSongIndex(SongPlayer.currentSong);
 				 currentSongIndex--;		
 				if (currentSongIndex < 0) {
-					currentBuzzObject.stop();
-					SongPlayer.currentSong.playing = null;
+					stopSong(SongPlayer.currentSong);
+				} else {
+					stopSong(SongPlayer.currentSong);
+					setSong(SongPlayer.currentAlbum.songs[currentSongIndex]);
+					playSong(SongPlayer.currentSong);
 				}
+			};
+		
+			SongPlayer.next = function(song) {
+				var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+				if (currentSongIndex < (SongPlayer.currentAlbum.songs.length - 1)) {
+					currentSongIndex++;
+					stopSong(SongPlayer.currentSong);
+					setSong(SongPlayer.currentAlbum.songs[currentSongIndex]);
+					playSong(SongPlayer.currentSong);
+				} else {
+					stopSong(SongPlayer.currentSong);
+				}
+
 			};
 
 		  
