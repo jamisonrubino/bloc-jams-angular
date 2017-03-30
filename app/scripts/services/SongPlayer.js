@@ -47,13 +47,21 @@
 		  
      		SongPlayer.currentAlbum = Fixtures.getAlbum();
 		 	SongPlayer.currentSong = null;
+			SongPlayer.volume = 80;
 			/**
 			* @desc Current playback time (in seconds) of currently playing song
 			* @type {Number}
 			*/
 			SongPlayer.currentTime = null;	
+			
 		
 		
+			SongPlayer.setVolume = function(volume) {
+				SongPlayer.volume = volume;
+				if (currentBuzzObject) {
+					currentBuzzObject.setVolume(volume);
+				}
+			};
 			/**
  			* @function setCurrentTime
  			* @desc Set current time (in seconds) of currently playing song
