@@ -8,8 +8,9 @@
 		* @desc plays song, sets song's playing attribute to true
 		*/
 	  	playSong = function(song) {
-			currentBuzzObject.play();
-			song.playing = true;
+			currentBuzzObject.play()
+			song.playing = true
+			SongPlayer.currentSong.playing = true
 	  	},
 
 
