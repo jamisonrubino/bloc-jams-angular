@@ -106,7 +106,8 @@
 	 	SongPlayer.pause = function(song) {
 			song = song || SongPlayer.currentSong;
 			currentBuzzObject.pause();
-		 	song.playing = false;
+		 	song.playing = false
+		 	SongPlayer.currentSong.playing = false
 	 	};
 
 		SongPlayer.previous = function() {
