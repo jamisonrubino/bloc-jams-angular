@@ -1,7 +1,7 @@
  (function() {
  	function SongPlayer($rootScope, Fixtures) {
 	 	var SongPlayer = {},
-		SongPlayer.SongPlayer.currentBuzzObject = null,
+		SongPlayer.currentBuzzObject = null,
 
 		/**
 		* @function playSong
