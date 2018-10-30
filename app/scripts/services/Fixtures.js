@@ -1,9 +1,9 @@
- (function() {
-     function Fixtures() {
-        var Fixtures = {};
-		  
-		  var albumPicasso = {
-				title: 'The Colors',
+(function() {
+	function Fixtures() {
+		var Fixtures = {};
+		var albums = [
+		  	{
+		    	title: 'The Colors',
 				artist: 'Pablo Picasso',
 				label: 'Cubism',
 				year: '1881',
@@ -14,10 +14,10 @@
 					 { title: 'Red', duration: '268.45', audioUrl: '/assets/music/red' },
 					 { title: 'Pink', duration: '153.14', audioUrl: '/assets/music/pink' },
 					 { title: 'Magenta', duration: '374.22', audioUrl: '/assets/music/magenta' }
-				]
-		  };
-
-		  var albumMarconi = {
+				],
+				id: 1
+		  	},
+			{
 				title: 'The Telephone',
 				artist: 'Guglielmo Marconi',
 				label: 'EM',
@@ -29,33 +29,34 @@
 					 { title: 'Fits in your pocket', duration: '3:21' },
 					 { title: 'Can you hear me now?', duration: '3:14' },
 					 { title: 'Wrong phone number', duration: '2:15' }
-				]
-		  };
-		  
-			 var albumSpring = {
-				  title: 'Spring',
-				  artist: 'Time',
-				  label: 'Four Seasons',
-				  year: '2017',
-				  albumArtUrl: 'assets/images/album_covers/14.png',
-				  songs: [
-						{ title: 'In', duration: '12:00' },
-						{ title: 'Out', duration: '6:00' },
-						{ title: 'Up', duration: '1:23'},
-						{ title: 'Down', duration: '3:21' },
-						{ title: 'Left/Right', duration: '9:15'}
-				  ],
-				 num: 3
-			 };
-
-		   Fixtures.getAlbum = function() {
-         	return albumPicasso;
-     		};
-		  
+				],
+				id: 2
+			},
+			{
+				title: 'Spring',
+				artist: 'Time',
+				label: 'Four Seasons',
+				year: '2017',
+				albumArtUrl: 'assets/images/album_covers/14.png',
+				songs: [
+					{ title: 'In', duration: '12:00' },
+					{ title: 'Out', duration: '6:00' },
+					{ title: 'Up', duration: '1:23'},
+					{ title: 'Down', duration: '3:21' },
+					{ title: 'Left/Right', duration: '9:15'}
+				],
+				id: 3
+			}
+		]
+		
+			Fixtures.getAlbum = function(i) {
+				return albums.find(album=>album.id==i)
+			}
+			
 		  	Fixtures.getCollection = function(numberOfAlbums) {
 				var albumList = [];
 				for(var i=0; i<(numberOfAlbums-1); i++) {
-					albumList.push(Fixtures.getAlbum());
+					albumList.push(albums[i%3]);
 				}
 				return albumList;
 			};

@@ -3,12 +3,12 @@
 		  <img src="{{ album.albumArtUrl }}">
 		  <div class="collection-album-info caption">
              <p>
-                 <a class="album-name" ui-sref="album">{{ album.title }}</a>
-					  <br/>
-                 <a ui-sref="album">{{ album.artist }}</a>
-					  <br/>
-					  {{ album.songs.length }} songs
-					 <br/>
+                <a class="album-name" ui-sref="albums.detail({id: album.id})">{{ album.title }}</a>
+				<br/>
+                <a ui-sref="albums.detail({id: album.id})">{{ album.artist }}</a>
+                <br/>
+                {{ album.songs.length }} songs
+                <br/>
              </p>
          </div>
      </div>
