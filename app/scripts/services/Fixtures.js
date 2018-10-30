@@ -1,9 +1,9 @@
 (function() {
 	function Fixtures() {
-		var Fixtures = {};
-		var albums = [
-		  	{
-		    	title: 'The Colors',
+		var Fixtures = {},
+		albums = [
+		  {
+		    title: 'The Colors',
 				artist: 'Pablo Picasso',
 				label: 'Cubism',
 				year: '1881',
@@ -48,23 +48,23 @@
 				id: 3
 			}
 		]
-		
-			Fixtures.getAlbum = function(i) {
-				return albums.find(album=>album.id==i)
+
+		Fixtures.getAlbum = function(i) {
+			return albums.find(album=>album.id==i)
+		}
+
+  	Fixtures.getCollection = function(numberOfAlbums) {
+			var albumList = [];
+			for(var i=0; i<(numberOfAlbums-1); i++) {
+				albumList.push(albums[i%3])
 			}
-			
-		  	Fixtures.getCollection = function(numberOfAlbums) {
-				var albumList = [];
-				for(var i=0; i<(numberOfAlbums-1); i++) {
-					albumList.push(albums[i%3]);
-				}
-				return albumList;
-			};
-		  
-         return Fixtures;
-     }
- 
+			return albumList
+		}
+
+    return Fixtures
+	}
+
      angular
          .module('blocJams')
          .factory('Fixtures', Fixtures);
- })();
+ })()

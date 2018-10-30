@@ -1,6 +1,6 @@
  (function() {
  	function SongPlayer($rootScope, Fixtures) {
-	 	var SongPlayer = {},	  
+	 	var SongPlayer = {},
 		currentBuzzObject = null,
 
 		/**
@@ -11,8 +11,8 @@
 			currentBuzzObject.play();
 			song.playing = true;
 	  	},
-	  
-		
+
+
 		/**
 		* @function setSong
 		* @desc Stops currently playing song and loads new audio file as currentBuzzObject
@@ -30,7 +30,7 @@
 				formats: ['mp3'],
 				preload: true
 			});
-			
+
 		   currentBuzzObject.bind('timeupdate', function() {
 				 $rootScope.$apply(function() {
 					  SongPlayer.currentTime = currentBuzzObject.getTime();
@@ -39,18 +39,18 @@
 			song.playing = true;
 			SongPlayer.currentSong = song;
 		},
-	
+
 		getSongIndex = function(song) {
 			return SongPlayer.currentAlbum.songs.indexOf(song);
 		},
-	  
+
 		stopSong = function(song) {
 			currentBuzzObject.pause()
 			currentBuzzObject = null
 			SongPlayer.currentSong.playing = false
 			SongPlayer.currentTime = 0
 		}
-	  
+
  		SongPlayer.currentAlbum = Fixtures.getAlbum();
 	 	SongPlayer.currentSong = null;
 		SongPlayer.volume = 80;
@@ -58,9 +58,9 @@
 		* @desc Current playback time (in seconds) of currently playing song
 		* @type {Number}
 		*/
-		SongPlayer.currentTime = null;	
-	
-	
+		SongPlayer.currentTime = null;
+
+
 		SongPlayer.setVolume = function(volume) {
 			SongPlayer.volume = volume;
 			if (currentBuzzObject) {
@@ -77,12 +77,12 @@
 				currentBuzzObject.setTime(time);
 			}
 		};
-	
+
 		/**
 		* @function SongPlayer.play
 		* @desc SongPlayer's play method, stops current song, if playing, and plays new song
 		*/
-	  	SongPlayer.play = function(song) {  
+	  SongPlayer.play = function(song) {
 			song = song || SongPlayer.currentSong;
 			if (SongPlayer.currentSong !== song) {
 				setSong(song);
@@ -97,8 +97,8 @@
 				}
 			}
  		};
-			
-	  
+
+
 		/**
 		* @function SongPlayer.pause
 		* @desc SongPlayer's pause method, pauses currently playing song
@@ -108,10 +108,10 @@
 			currentBuzzObject.pause();
 		 	song.playing = false;
 	 	};
-	
+
 		SongPlayer.previous = function() {
 			 var currentSongIndex = getSongIndex(SongPlayer.currentSong);
-			 currentSongIndex--;		
+			 currentSongIndex--;
 			if (currentSongIndex < 0) {
 				stopSong(SongPlayer.currentSong);
 			} else {
@@ -120,7 +120,7 @@
 				playSong(SongPlayer.currentSong);
 			}
 		};
-	
+
 		SongPlayer.next = function(song) {
 			var currentSongIndex = getSongIndex(SongPlayer.currentSong);
 			if (currentSongIndex < (SongPlayer.currentAlbum.songs.length - 1)) {
@@ -134,10 +134,10 @@
 
 		};
 
-		  
+
         	return SongPlayer;
 	  	}
- 
+
 	 	angular
       	.module('blocJams')
          .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
