@@ -91,6 +91,7 @@
 			} else if (SongPlayer.currentSong === song) {
 				if (currentBuzzObject.isPaused()) {
 					currentBuzzObject.play()
+					SongPlayer.currentSong.playing = true
 				} else {
 					var song = SongPlayer.currentAlbum.songs[0]
 					setSong(song)
