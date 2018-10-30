@@ -45,14 +45,14 @@
 		},
 
 		stopSong = function(song) {
-			currentBuzzObject.pause()
+			SongPlayer.pause(song)
 			currentBuzzObject = null
-			SongPlayer.currentSong.playing = false
-			SongPlayer.currentTime = 0
+			SongPlayer.currentSong = null
+			SongPlayer.currentTime = null
 		}
 
- 		SongPlayer.currentAlbum = Fixtures.getAlbum();
-	 	SongPlayer.currentSong = null;
+ 		SongPlayer.currentAlbum = null
+	 	SongPlayer.currentSong = null
 		SongPlayer.volume = 80;
 		/**
 		* @desc Current playback time (in seconds) of currently playing song
@@ -85,15 +85,15 @@
 	  SongPlayer.play = function(song) {
 			song = song || SongPlayer.currentSong;
 			if (SongPlayer.currentSong !== song) {
-				setSong(song);
-				playSong(song);
+				setSong(song)
+				playSong(song)
 			} else if (SongPlayer.currentSong === song) {
 				if (currentBuzzObject.isPaused()) {
-					currentBuzzObject.play();
+					currentBuzzObject.play()
 				} else {
-					var song = SongPlayer.currentAlbum.songs[currentSongIndex];
-					setSong(song);
-					playSong(song);
+					var song = SongPlayer.currentAlbum.songs[currentSongIndex]
+					setSong(song)
+					playSong(song)
 				}
 			}
  		};
