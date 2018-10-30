@@ -1,14 +1,14 @@
  (function() {
  	function SongPlayer($rootScope, Fixtures) {
 	 	var SongPlayer = {},
-		SongPlayer.currentBuzzObject = null,
+		currentBuzzObject = null,
 
 		/**
 		* @function playSong
 		* @desc plays song, sets song's playing attribute to true
 		*/
 	  	playSong = function(song) {
-			SongPlayer.currentBuzzObject.play()
+			currentBuzzObject.play()
 			song.playing = true
 			SongPlayer.currentSong.playing = true
 	  	},
@@ -16,25 +16,25 @@
 
 		/**
 		* @function setSong
-		* @desc Stops currently playing song and loads new audio file as SongPlayer.currentBuzzObject
+		* @desc Stops currently playing song and loads new audio file as currentBuzzObject
 		* @param {Object} song
 		*/
 		setSong = function(song) {
-			if (SongPlayer.currentBuzzObject) {
+			if (currentBuzzObject) {
 				stopSong(SongPlayer.currentSong);
 			}
 			/**
 			* @desc Buzz object audio file
 			* @type {Object}
 			*/
-			SongPlayer.currentBuzzObject = new buzz.sound(song.audioUrl, {
+			currentBuzzObject = new buzz.sound(song.audioUrl, {
 				formats: ['mp3'],
 				preload: true
 			});
 
-		   SongPlayer.currentBuzzObject.bind('timeupdate', function() {
+		   currentBuzzObject.bind('timeupdate', function() {
 				 $rootScope.$apply(function() {
-					  SongPlayer.currentTime = SongPlayer.currentBuzzObject.getTime();
+					  SongPlayer.currentTime = currentBuzzObject.getTime();
 				 });
 		   });
 			song.playing = true;
@@ -46,8 +46,8 @@
 		},
 
 		stopSong = function(song) {
-			SongPlayer.pause(song)
-			SongPlayer.currentBuzzObject = null
+			SongPlayer.pause()
+			currentBuzzObject = null
 			SongPlayer.currentSong = null
 			SongPlayer.currentTime = null
 		}
@@ -64,8 +64,8 @@
 
 		SongPlayer.setVolume = function(volume) {
 			SongPlayer.volume = volume;
-			if (SongPlayer.currentBuzzObject) {
-				SongPlayer.currentBuzzObject.setVolume(volume);
+			if (currentBuzzObject) {
+				currentBuzzObject.setVolume(volume);
 			}
 		};
 		/**
@@ -74,8 +74,8 @@
  		* @param {Number} time
  		*/
 		SongPlayer.setCurrentTime = function(time) {
-		  	if (SongPlayer.currentBuzzObject) {
-				SongPlayer.currentBuzzObject.setTime(time);
+		  	if (currentBuzzObject) {
+				currentBuzzObject.setTime(time);
 			}
 		};
 
@@ -89,8 +89,8 @@
 				setSong(song)
 				playSong(song)
 			} else if (SongPlayer.currentSong === song) {
-				if (SongPlayer.currentBuzzObject.isPaused()) {
-					SongPlayer.currentBuzzObject.play()
+				if (currentBuzzObject.isPaused()) {
+					currentBuzzObject.play()
 				} else {
 					var song = SongPlayer.currentAlbum.songs[0]
 					setSong(song)
@@ -106,7 +106,7 @@
 		*/
 	 	SongPlayer.pause = function(song) {
 			song = song || SongPlayer.currentSong;
-			SongPlayer.currentBuzzObject.pause();
+			currentBuzzObject.pause();
 		 	song.playing = false
 		 	SongPlayer.currentSong.playing = false
 	 	};
