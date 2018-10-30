@@ -53,7 +53,12 @@
 			*/
 			SongPlayer.currentTime = null;	
 			
-		
+			var stopSong = function(song) {
+				currentBuzzObject.pause()
+				currentBuzzObject = null
+				SongPlayer.currentSong.playing = false
+				SongPlayer.currentTime = 0
+			}
 		
 			SongPlayer.setVolume = function(volume) {
 				SongPlayer.volume = volume;
