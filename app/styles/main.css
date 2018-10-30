@@ -7,9 +7,13 @@
  *    IE on Windows Phone and in iOS.
  */
 
+main {
+    margin: 40px auto 200px;
+}
 
 /* Media Queries
    ========================================================================== */
+   
  .container.narrow {
      max-width: 56rem;
  }
